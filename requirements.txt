@@ -1,0 +1,4 @@
+falcon==3.0.1
+msgpack==1.0.3
+pytest==7.0.1
+uvicorn==0.17.5
