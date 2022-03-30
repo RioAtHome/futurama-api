@@ -1,4 +1,7 @@
-__pycache__/
+*/__pycache__/
+database/
 *_cache/
 *.py[cod]
 *.log
+dbtest
+futuramaDB.json
