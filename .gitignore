@@ -5,3 +5,4 @@ database/
 *.log
 dbtest
 futuramaDB.json
+.app.py.swp
