@@ -1,3 +1,4 @@
+import random
 import pytest
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
@@ -19,7 +20,7 @@ def setup_database():
 
 
 @pytest.fixture(scope="function")
-def setup_seasons(setup_database):
+def setup_data(setup_database):
     session = setup_database
 
     set_season_1 = Season(name="12")
@@ -87,3 +88,9 @@ def setup_seasons(setup_database):
     yield session
 
     session.close()
+
+
+@pytest.fixture(scope="function")
+def random_character():
+    character = ["Fry", "Leela", "Bender", "Hermus"]
+    return random.choice(character)

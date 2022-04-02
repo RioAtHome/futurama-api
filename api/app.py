@@ -4,7 +4,7 @@ import falcon.asgi
 import logging
 
 
-logging.basicConfig(filename='example.log', encoding='utf-8', level=logging.DEBUG)
+logging.basicConfig(filename="example.log", encoding="utf-8", level=logging.DEBUG)
 
 
 class QouteResource:
@@ -18,20 +18,13 @@ class QouteResource:
                 "Title": "",
                 "Episode Number": 2,
                 "Release Date": "",
-                "Qoute": {
-                    "Character": "",
-                    "Saying": "",
-                    "Time Stamp": ""
-                }
-            }
+                "Qoute": {"Character": "", "Saying": "", "Time Stamp": ""},
+            },
         }
 
-        
         resp.text = json.dumps(results, ensure_ascii=False)
-        resp.set_header('Powered-By', 'Falcon')
+        resp.set_header("Powered-By", "Falcon")
         resp.status = falcon.HTTP_200
-
-
 
     async def on_get_character(self, req, resp):
         pass
@@ -51,4 +44,4 @@ class QouteResource:
 
 app = falcon.asgi.App()
 qoute = QouteResource()
-app.add_route('/api', qoute)
+app.add_route("/api", qoute)

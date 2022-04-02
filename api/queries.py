@@ -1,27 +1,16 @@
-from sqlalchemy import text, insert
+import random
+from sqlalchemy import select
+from api.models import Base, Season, Episode, Line
 
 
-
-def insert_season(engine, table, season):
-    with engine.connect() as conn:
-        seasons = conn.execute(text("SELECT name FROM seasons"))
-        if season in seasons:
+CHARACTERS = ["Leela", "Fry", "Bender"]
 
 
+def get_qoute_query(session, character=None):
+    if character is None:
+        character = random.choice(CHARACTERS)
+    stmt = select(Line).filter_by(character=character)
 
-        query = f'INSERT INTO {table} (name, numberOfEpisode) VALUES (:name, :numberOfEpisode)'
-        data = [{"name": season, "numberOfEpisode": 0}]
+    result = session.execute(stmt).all()
 
-        conn.execute(text(query), data)
-
-    # we need to commit our changes.
-    # conn.commit()
-
-def insert_episode(engine, table, episode):
-    with engine.connect() as conn:
-        pass
-
-
-def insert_script(engine, table, data):
-    with engine.connect() as conn:
-        pass
+    return result

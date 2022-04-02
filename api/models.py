@@ -65,4 +65,4 @@ class Line(Base):
     )
 
     def __repr__(self):
-        return f"<{self.character} said: {self.line} at ({self.timestamp})>"
+        return f"{self.character} said {self.line} at: {self.timestamp}"
