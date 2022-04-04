@@ -1,0 +1,8 @@
+*/__pycache__/
+database/
+*_cache/
+*.py[cod]
+*.log
+dbtest
+futuramaDB.json
+.app.py.swp
