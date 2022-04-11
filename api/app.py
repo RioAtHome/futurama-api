@@ -1,10 +1,6 @@
 import json
 import falcon
 import falcon.asgi
-import logging
-
-
-logging.basicConfig(filename="example.log", encoding="utf-8", level=logging.DEBUG)
 
 
 class QouteResource:
@@ -12,17 +8,8 @@ class QouteResource:
         pass
 
     async def on_get(self, req, resp):
-        results = {
-            "Season": 1,
-            "Episode": {
-                "Title": "",
-                "Episode Number": 2,
-                "Release Date": "",
-                "Qoute": {"Character": "", "Saying": "", "Time Stamp": ""},
-            },
-        }
 
-        resp.text = json.dumps(results, ensure_ascii=False)
+        resp.media = quote
         resp.set_header("Powered-By", "Falcon")
         resp.status = falcon.HTTP_200
 
@@ -42,6 +29,9 @@ class QouteResource:
         pass
 
 
-app = falcon.asgi.App()
-qoute = QouteResource()
-app.add_route("/api", qoute)
+def create_app():
+    app = falcon.asgi.App()
+    qoute = QouteResource()
+    app.add_route("/api", qoute)
+
+    return app

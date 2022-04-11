@@ -6,6 +6,7 @@ from falcon import testing
 from api.models import Base, Season, Episode, Line
 from api.app import create_app
 
+
 @pytest.fixture(scope="function")
 def setup_database():
     engine = create_engine("sqlite://")
