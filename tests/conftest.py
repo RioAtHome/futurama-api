@@ -2,9 +2,9 @@ import random
 import pytest
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-
+from falcon import testing
 from api.models import Base, Season, Episode, Line
-
+from api.app import create_app
 
 @pytest.fixture(scope="function")
 def setup_database():
@@ -94,3 +94,8 @@ def setup_data(setup_database):
 def random_character():
     character = ["Fry", "Leela", "Bender", "Hermus"]
     return random.choice(character)
+
+
+@pytest.fixture(scope="function")
+def app():
+    return testing.TestClient(create_app())
