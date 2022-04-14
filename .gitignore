@@ -3,6 +3,6 @@ database/
 *_cache/
 *.py[cod]
 *.log
-dbtest
+*.db
 futuramaDB.json
 .app.py.swp

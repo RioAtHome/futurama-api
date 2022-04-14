@@ -1,9 +1,9 @@
 import random
 from sqlalchemy import select
-from api.models import Base, Season, Episode, Line
+from models import Line
 
 
-CHARACTERS = ["Leela", "Fry", "Bender"]
+CHARACTERS = ["Fry", "Leela", "Bender", "Hermus", "Amy"]
 
 
 def get_qoute_query(session, character=None):
