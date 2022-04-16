@@ -1,47 +1,31 @@
-import json
 import falcon
 import falcon.asgi
-import logging
+from sqlalchemy import create_engine
+from sqlalchemy.orm import scoped_session
+from sqlalchemy.orm import sessionmaker
+from config import get_database_url, create_dummy_database
+from models import Base
+from resources import QouteResource
+from middleware import SQLAlchemySessionManager
 
 
-logging.basicConfig(filename="example.log", encoding="utf-8", level=logging.DEBUG)
+def create_app(debug=True):
+    engine = create_engine(get_database_url(debug=debug))
+    Base.metadata.create_all(engine)
 
+    session_factory = sessionmaker(bind=engine)
+    Session = scoped_session(session_factory)
 
-class QouteResource:
-    def __init__(self):
-        pass
+    if debug:
+        create_dummy_database(Session)
 
-    async def on_get(self, req, resp):
-        results = {
-            "Season": 1,
-            "Episode": {
-                "Title": "",
-                "Episode Number": 2,
-                "Release Date": "",
-                "Qoute": {"Character": "", "Saying": "", "Time Stamp": ""},
-            },
-        }
+    app = falcon.asgi.App(
+        middleware=[
+            SQLAlchemySessionManager(Session),
+        ]
+    )
+    qoute = QouteResource()
+    app.add_route("/api", qoute)
+    app.add_route("/api/{character}", qoute)
 
-        resp.text = json.dumps(results, ensure_ascii=False)
-        resp.set_header("Powered-By", "Falcon")
-        resp.status = falcon.HTTP_200
-
-    async def on_get_character(self, req, resp):
-        pass
-
-    async def on_get_season(self, req, resp):
-        pass
-
-    async def on_get_episode(self, req, resp):
-        pass
-
-    async def on_get_character_season(self, req, resp):
-        pass
-
-    async def on_get_character_episode(self, req, resp):
-        pass
-
-
-app = falcon.asgi.App()
-qoute = QouteResource()
-app.add_route("/api", qoute)
+    return app
