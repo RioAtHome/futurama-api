@@ -26,5 +26,6 @@ def create_app(debug=True):
     )
     qoute = QouteResource()
     app.add_route("/api", qoute)
+    app.add_route("/api/{character}", qoute)
 
     return app

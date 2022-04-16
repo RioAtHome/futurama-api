@@ -31,28 +31,28 @@ def create_dummy_database(session):
     session.commit()
     line_1 = Line(
         line="This is where it all begins",
-        character="Fry",
+        character="fry",
         timestamp="(:30)",
         episode=set_episode_1.title,
         season=set_season_1.name,
     )
     line_2 = Line(
         line="aww crap",
-        character="Leela",
+        character="leela",
         timestamp="(:45)",
         episode=set_episode_1.title,
         season=set_season_1.name,
     )
     line_3 = Line(
         line="WEEEE",
-        character="Hermus",
+        character="hermus",
         timestamp="(:30)",
         episode=set_episode_2.title,
         season=set_season_2.name,
     )
     line_4 = Line(
         line="Bite my shiny metal ass",
-        character="Bender",
+        character="bender",
         timestamp="(:45)",
         episode=set_episode_2.title,
         season=set_season_2.name,
