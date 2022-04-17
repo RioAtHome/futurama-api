@@ -1,3 +1,4 @@
 falcon==3.0.1
 pytest==7.0.1
 uvicorn==0.17.5
+sqlalchemy
