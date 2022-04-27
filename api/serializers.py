@@ -3,9 +3,9 @@ import re
 
 def serialize_lines(query_result):
     serialized_dict = dict()
-    line_dict = dict()
     query_num = 1
     for row in query_result:
+        line_dict = dict()
         for key in row[0].__dict__:
             if key == "_sa_instance_state":
                 continue

@@ -1,22 +1,35 @@
 import random
-from sqlalchemy import select
-from models import Line
+from sqlalchemy import select, func
+from sqlalchemy.exc import ArgumentError
+from models import Line, Episode, Season
 
 
 class CharacterNotFound(Exception):
     pass
 
 
-CHARACTERS = ["fry", "leela", "bender", "hermus"]
+def get_qoute_query(session, season_filter=None, character_filter=None):
+    if season_filter is None:
+        season_filter = (
+            select(Line.season).order_by(func.random()).limit(1).scalar_subquery()
+        )
+    if character_filter is None:
+        character_filter = (
+            select(Line.character)
+            .where(Line.season == season_filter)
+            .order_by(func.random())
+            .limit(1)
+            .scalar_subquery()
+        )
 
-
-def get_qoute_query(session, character=None):
-    if character is None:
-        character = random.choice(CHARACTERS)
-    character = character.lower()
-    stmt = select(Line).filter_by(character=character)
+    stmt = (
+        select(Line)
+        .where(Line.season == season_filter, Line.character == character_filter)
+        .limit(4)
+    )
 
     result = session.execute(stmt).all()
+
     if not result:
-        raise CharacterNotFound(f"No lines for character {character}...odd.")
+        raise CharacterNotFound()
     return result

@@ -23,15 +23,8 @@ def test_get_character_gives_error(app):
     assert result.status_code == 404
 
 
-def test_get_quote_from_season(app):
-    result = app.simulate_get(f"/api/12")
+# def test_get_quote_from_season(app):
+#     result = app.simulate_get(f"/api/12")
 
-    assert result.json["season"] == 12
-    assert result.status_code == 200
-
-def test_get_quote_from_season_episode(app):
-    result = app.simulate_get(f"/api/12/22")
-
-    assert result.json['episode'] == 22
-    assert result.json["season"] == 12
-    assert result.status_code == 200
+#     assert result.json["season"] == "12"
+#     assert result.status_code == 200
