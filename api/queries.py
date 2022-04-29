@@ -1,7 +1,5 @@
-import random
 from sqlalchemy import select, func
-from sqlalchemy.exc import ArgumentError
-from models import Line, Episode, Season
+from models import Line
 
 
 class CharacterNotFound(Exception):
