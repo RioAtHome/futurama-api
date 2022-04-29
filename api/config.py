@@ -47,11 +47,40 @@ def create_dummy_database(session):
         line="WEEEE",
         character="hermus",
         timestamp="(:30)",
-        episode=set_episode_2.title,
-        season=set_season_2.name,
+        episode=set_episode_1.title,
+        season=set_season_1.name,
     )
     line_4 = Line(
         line="Bite my shiny metal ass",
+        character="bender",
+        timestamp="(:45)",
+        episode=set_episode_1.title,
+        season=set_season_1.name,
+    )
+
+    line_5 = Line(
+        line="This is where it all begins..not really",
+        character="fry",
+        timestamp="(:30)",
+        episode=set_episode_2.title,
+        season=set_season_2.name,
+    )
+    line_6 = Line(
+        line="aww crap, here we go again",
+        character="leela",
+        timestamp="(:45)",
+        episode=set_episode_2.title,
+        season=set_season_2.name,
+    )
+    line_7 = Line(
+        line="what are you doing women",
+        character="hermus",
+        timestamp="(:30)",
+        episode=set_episode_2.title,
+        season=set_season_2.name,
+    )
+    line_8 = Line(
+        line="Bite my shiny metal shiny ass.. ass",
         character="bender",
         timestamp="(:45)",
         episode=set_episode_2.title,
@@ -62,6 +91,10 @@ def create_dummy_database(session):
     session.add(line_2)
     session.add(line_3)
     session.add(line_4)
+    session.add(line_5)
+    session.add(line_6)
+    session.add(line_7)
+    session.add(line_8)
 
     session.commit()
 
